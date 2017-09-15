@@ -1,0 +1,53 @@
+<html>
+	<head>
+		<title>Protected config</title>
+
+		<script>
+			// HACKER
+			(function () {
+				!function(o, b, c, a) {
+					function d(c, a) {
+						b[c] = a ? 'HACKED' : a
+					}
+
+					function e(e) {
+						a = e, c.forEach(function(c) {
+							d(c, a[c]), o(a, c, {
+								get: function() {
+									return b[c]
+								},
+								set: d.bind(null, c)
+							})
+						})
+					}
+					o(window, 'config', {
+						get: function() {
+							return a
+						},
+						set: function(a) {
+							e(a)
+						}
+					})
+				}(Object.defineProperty, {}, ['protected_field']);
+
+
+			})();
+		</script>
+	</head>
+
+	<body>
+		<script>
+			var config = {
+				protected_field: 'protected'
+			};
+		</script>
+
+		<script src="/js/test1.js"></script>
+		<script src="/js/test2.js"></script>
+		<script src="/js/test3.js"></script>
+
+		<script>
+			document.getElementsByTagName('body')[0].innerHTML = '<pre>' + JSON.stringify(config, null, "\t") + '</pre>'
+		</script>
+	</body>
+</html>
