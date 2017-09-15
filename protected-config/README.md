@@ -12,4 +12,4 @@
 
 ## запуск
 * выполнить `npm install && npm start`
-* открыть 'http://localhost:3000'
+* открыть http://localhost:3000
